@@ -1,0 +1,6 @@
+{
+  "name": "Kloster - Cerveza Artesanal de Abadía",
+  "description": "Brutalismo Monástico y reliquia de abadía moderna. Experiencia digital de ultra lujo y scrollytelling de guarda para KLOSTER Cerveza Artesanal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
