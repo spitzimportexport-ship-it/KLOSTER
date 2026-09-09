@@ -184,21 +184,54 @@ export const MonkIsotype: React.FC<MonkIsotypeProps> = ({
   );
 };
 
-export const GothicCross: React.FC<{ className?: string; color?: string }> = ({
+export const GothicCross: React.FC<{
+  className?: string;
+  color?: string;
+  fillColor?: string;
+}> = ({
   className = 'w-6 h-6',
-  color = '#D1A85A'
+  color = 'currentColor',
+  fillColor = '#080C09'
 }) => {
+  // Exact Gothic lanceolate cross with barbed trefoil finials (Emblema Kloster)
+  const crossPath =
+    "M 54.5 41.5 L 54.5 25 C 55.5 24 59 23 65 20 C 57 15 53 10 50 5 C 47 10 43 15 35 20 C 41 23 44.5 24 45.5 25 L 45.5 41.5 L 29 41.5 C 28 40.5 27 37 24 31 C 19 39 14 43 9 46 C 14 49 19 53 24 61 C 27 55 28 51.5 29 50.5 L 45.5 50.5 L 45.5 71 C 44.5 72 41 73 35 76 C 43 81 47 86 50 91 C 53 86 57 81 65 76 C 59 73 55.5 72 54.5 71 L 54.5 50.5 L 71 50.5 C 72 51.5 73 55 76 61 C 81 53 86 49 91 46 C 86 43 81 39 76 31 C 73 37 72 40.5 71 41.5 Z";
+
   return (
-    <svg viewBox="0 0 32 36" fill="none" className={`inline-block ${className}`} xmlns="http://www.w3.org/2000/svg">
+    <svg
+      viewBox="0 0 100 100"
+      fill="none"
+      className={`inline-block ${className}`}
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ overflow: 'visible' }}
+    >
+      {/* Dark Abbey Core Fill */}
       <path
-        d="M 16 2 L 18 10 L 22 11 L 18 13 L 16 32 L 14 13 L 10 11 L 14 10 Z"
-        fill={color}
+        d={crossPath}
+        fill={fillColor}
       />
+      {/* Outer Golden Heraldic Bevel */}
       <path
-        d="M 4 12 L 13 10 L 14 6 L 16 10 L 28 12 L 19 14 L 18 18 L 16 14 Z"
-        fill={color}
+        d={crossPath}
+        fill="none"
+        stroke={color}
+        strokeWidth="3.2"
+        strokeLinejoin="miter"
+        strokeMiterlimit="3"
       />
-      <circle cx="16" cy="12" r="2" fill="#F7F4EA" />
+      {/* Inner Golden Profile Line */}
+      <path
+        d={crossPath}
+        transform="translate(50 48) scale(0.68) translate(-50 -48)"
+        fill="none"
+        stroke={color}
+        strokeWidth="1.8"
+        strokeLinejoin="miter"
+        strokeMiterlimit="3"
+        opacity="0.9"
+      />
+      {/* Center Abbey Intersection Accent */}
+      <circle cx="50" cy="46" r="2.2" fill={color} />
     </svg>
   );
 };

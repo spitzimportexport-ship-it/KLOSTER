@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { GothicCross } from './MonkIsotype';
-import { Menu, X, Shield, ChevronRight } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 interface NavbarProps {
-  onOpenB2B: () => void;
+  onOpenContact: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeLang, setActiveLang] = useState<'ES' | 'EN'>('ES');
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      // Show floating navbar only when user has scrolled past the hero top header
+      setScrolled(window.scrollY > 90);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Nuestra Herencia', href: '#herencia' },
-    { name: 'El Ritual del Cáliz', href: '#caliz' },
-    { name: 'Catálogo de Guarda', href: '#catalogo' },
-    { name: 'Distribución B2B', href: '#b2b' }
+    { name: t('nav.collection'), href: '#catalogo' },
+    { name: t('nav.about'), href: '#quienes-somos' },
+    { name: t('nav.ritual'), href: '#caliz' },
+    { name: t('nav.contact'), href: '#contacto' }
   ];
 
   return (
@@ -35,7 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
           : 'opacity-0 -translate-y-full pointer-events-none py-3 border-b border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="site-container flex items-center justify-between">
         {/* Brand Left */}
         <a href="#" className="flex items-center gap-3 group focus:outline-none" aria-label="Kloster Inicio">
           <div className="w-8 h-8 rounded border border-[#D1A85A]/40 bg-[#17130F] flex items-center justify-center text-[#D1A85A] transition-all duration-300 group-hover:border-[#D1A85A] group-hover:shadow-[0_0_12px_rgba(209,168,90,0.3)]">
@@ -46,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
               kloster
             </span>
             <span className="font-cinzel text-[8px] uppercase tracking-[0.28em] text-[#D1A85A] font-semibold">
-              Cerveza Artesanal
+              {t('nav.brandSubtitle')}
             </span>
           </div>
         </a>
@@ -55,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
         <nav className="hidden lg:flex items-center gap-8" aria-label="Navegación Principal">
           {navLinks.map((link) => (
             <a
-              key={link.name}
+              key={link.href}
               href={link.href}
               className="font-cinzel text-xs uppercase tracking-[0.16em] text-[#F7F4EA]/80 hover:text-[#D1A85A] transition-colors relative py-1 group"
             >
@@ -67,35 +70,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
 
         {/* Right CTA & Controls */}
         <div className="hidden sm:flex items-center gap-4">
-          {/* Lang Selector */}
-          <div className="flex items-center border border-[#D1A85A]/30 rounded px-2 py-0.5 text-[10px] font-cinzel text-[#F7F4EA]/70">
-            <button
-              onClick={() => setActiveLang('ES')}
-              className={`px-1.5 py-0.5 rounded transition-colors ${activeLang === 'ES' ? 'text-[#D1A85A] font-bold' : 'hover:text-[#F7F4EA]'}`}
-            >
-              ES
-            </button>
-            <span className="text-[#D1A85A]/40">|</span>
-            <button
-              onClick={() => setActiveLang('EN')}
-              className={`px-1.5 py-0.5 rounded transition-colors ${activeLang === 'EN' ? 'text-[#D1A85A] font-bold' : 'hover:text-[#F7F4EA]'}`}
-            >
-              EN
-            </button>
-          </div>
+          {/* Functional Flag Language Selector */}
+          <LanguageSelector />
 
-          {/* B2B Action Button */}
+          {/* Contact Action Button */}
           <button
-            onClick={onOpenB2B}
-            className="group relative inline-flex items-center gap-2 px-4 py-2 bg-[#344A2B] hover:bg-[#3d5932] text-[#F2E5CE] font-cinzel text-xs uppercase tracking-[0.14em] font-semibold border border-[#D1A85A] rounded transition-all duration-300 shadow-[0_0_15px_rgba(209,168,90,0.2)] hover:shadow-[0_0_25px_rgba(209,168,90,0.45)] hover:-translate-y-[1px]"
+            onClick={onOpenContact}
+            className="group relative inline-flex items-center gap-2 px-4 py-2 bg-[#344A2B] hover:bg-[#3d5932] text-[#F2E5CE] font-cinzel text-xs uppercase tracking-[0.14em] font-semibold border border-[#D1A85A] rounded transition-all duration-300 shadow-[0_0_15px_rgba(209,168,90,0.2)] hover:shadow-[0_0_25px_rgba(209,168,90,0.45)] hover:-translate-y-[1px] cursor-pointer whitespace-nowrap"
           >
-            <span>Catálogo B2B</span>
+            <span>{t('nav.contact')}</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#D1A85A] transition-transform group-hover:translate-x-0.5" />
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="lg:hidden flex items-center gap-2">
+        {/* Mobile Menu Button & Language Selector */}
+        <div className="lg:hidden flex items-center gap-3">
+          <LanguageSelector />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-[#D1A85A] hover:text-[#F7F4EA] focus:outline-none"
@@ -112,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
           <div className="flex flex-col space-y-5">
             {navLinks.map((link) => (
               <a
-                key={link.name}
+                key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="font-cinzel text-sm uppercase tracking-[0.2em] text-[#F7F4EA] hover:text-[#D1A85A] py-2 border-b border-white/5 flex items-center justify-between"
@@ -125,11 +115,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenB2B }) => {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenB2B();
+                  onOpenContact();
                 }}
-                className="w-full py-3 bg-[#344A2B] text-[#F2E5CE] font-cinzel text-xs uppercase tracking-[0.16em] font-bold border border-[#D1A85A] rounded text-center shadow-[0_0_15px_rgba(209,168,90,0.3)]"
+                className="w-full py-3 bg-[#344A2B] text-[#F2E5CE] font-cinzel text-xs uppercase tracking-[0.16em] font-bold border border-[#D1A85A] rounded text-center shadow-[0_0_15px_rgba(209,168,90,0.3)] cursor-pointer"
               >
-                Solicitar Asignación B2B
+                {t('nav.contact')}
               </button>
             </div>
           </div>

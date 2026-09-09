@@ -1,6 +1,10 @@
 import { BeerVariant, RitualStep, MonasticPillar } from '../types';
+import lagerBottleImg from '../assets/images/regenerated_image_1788995261339.png';
+import vainillaBottleImg from '../assets/images/regenerated_image_1788997672030.png';
+import robleBottleImg from '../assets/images/regenerated_image_1788997663314.png';
+import hydrateBottleImg from '../assets/images/regenerated_image_1788997684079.png';
 
-export const OFFICIAL_BOTTLE_IMAGE_URL = 'https://i.postimg.cc/cCMj1RJS/Chat-GPT-Image-2-sept-2026-20-54-10.png';
+export const OFFICIAL_BOTTLE_IMAGE_URL = lagerBottleImg;
 
 export const BEER_VARIANTS: BeerVariant[] = [
   {
@@ -14,7 +18,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
     colorCode: '#D1A85A',
     accentColor: '#344A2B',
     bottleLabelColor: '#F2E5CE',
-    image: OFFICIAL_BOTTLE_IMAGE_URL,
+    image: lagerBottleImg,
     tagline: 'Base · Fresca · Equilibrada',
     description: 'Cerveza dorada brillante de cuerpo equilibrado y espuma cremosa, elaborada con maltas nobles y lúpulos continentales bajo reposo en frío.',
     aroma: 'Cereales malteados tostados, corteza fresca de pan rústico, con un sutil destello floral de lúpulo continental noble.',
@@ -40,7 +44,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
     colorCode: '#D1A85A',
     accentColor: '#68733A',
     bottleLabelColor: '#F2E5CE',
-    image: OFFICIAL_BOTTLE_IMAGE_URL,
+    image: vainillaBottleImg,
     tagline: 'Aromática · Suave · Sublime',
     description: 'Fusión delicada de malta dorada y vainas enteras de vainilla seleccionadas, maceradas en frío para un perfil aromático sedoso y envolvente.',
     aroma: 'Vainilla natural balsámica, crema inglesa, galleta horneada y miel de flores silvestres de los valles.',
@@ -65,7 +69,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
     colorCode: '#5A3A24',
     accentColor: '#B66A3A',
     bottleLabelColor: '#5A3A24',
-    image: OFFICIAL_BOTTLE_IMAGE_URL,
+    image: robleBottleImg,
     tagline: 'Compleja · Maderosa · Nobleza Pura',
     description: 'Madurada pacientemente con duelas de roble tostado que aportan taninos sedosos, recuerdos de madera noble, caramelo y sutil calidez.',
     aroma: 'Madera de roble tostado, toffee artesanal, vainilla amaderada y notas balsámicas suaves.',
@@ -90,7 +94,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
     colorCode: '#2E6F56',
     accentColor: '#D1A85A',
     bottleLabelColor: '#E8F1EB',
-    image: OFFICIAL_BOTTLE_IMAGE_URL,
+    image: hydrateBottleImg,
     tagline: '0.0% Alcohol · Pura · Isotónica',
     description: 'Toda la nobleza y frescura del mosto cervecero sin alcohol. Una alternativa pura e isotónica con espuma densa y sabor a cereal fresco.',
     aroma: 'Cereales tiernos, notas frescas de lúpulo aromático y suave toque herbal refrescante.',
@@ -153,7 +157,7 @@ export const MONASTIC_PILLARS: MonasticPillar[] = [
   {
     title: 'Lúpulos Aromáticos',
     desc: 'Flores de lúpulo continental añadidas en momentos litúrgicos de la cocción, aportando amargor noble, sedoso y herbal sin asperezas.',
-    icon: 'Sparkles',
+    icon: 'Flower',
     tag: 'Aroma Continental'
   },
   {

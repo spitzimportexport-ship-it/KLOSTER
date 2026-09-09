@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Sparkles, RotateCcw, Volume2, VolumeX, ShieldCheck, Thermometer, Compass, Flame } from 'lucide-react';
+import { ShieldCheck, Thermometer, Compass, Flame } from 'lucide-react';
+import { GothicCross } from './MonkIsotype';
 import pourChaliceImg from '../assets/images/kloster_pour_chalice_1788393272393.jpg';
+import { useLanguage } from '../context/LanguageContext';
 
 interface Bubble {
   x: number;
@@ -21,6 +23,7 @@ interface CondensationDrop {
 }
 
 export const PourRitualSection: React.FC = () => {
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -30,78 +33,8 @@ export const PourRitualSection: React.FC = () => {
   const targetProgressRef = useRef<number>(0);
   const currentProgressRef = useRef<number>(0);
   const hasTriggeredRef = useRef<boolean>(false);
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
-  const [soundEnabled, setSoundEnabled] = useState<boolean>(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const noiseNodeRef = useRef<AudioNode | null>(null);
-
   // Active liturgical step indicator based on progress
   const currentStep = pourProgress < 0.25 ? 0 : pourProgress < 0.65 ? 1 : pourProgress < 0.92 ? 2 : 3;
-
-  // Sound synthesis for authentic pour fizz & abbey atmosphere
-  const toggleSound = () => {
-    if (!soundEnabled) {
-      try {
-        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-        const ctx = new AudioContextClass();
-        audioCtxRef.current = ctx;
-
-        // Create brown/pink noise buffer for gentle liquid fizz
-        const bufferSize = ctx.sampleRate * 2;
-        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const data = buffer.getChannelData(0);
-        let lastOut = 0.0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          data[i] = (lastOut + 0.02 * white) / 1.02;
-          lastOut = data[i];
-          data[i] *= 3.5;
-        }
-
-        const noise = ctx.createBufferSource();
-        noise.buffer = buffer;
-        noise.loop = true;
-
-        // Bandpass filter centered at warm pour frequencies
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(800, ctx.currentTime);
-        filter.Q.setValueAtTime(1.8, ctx.currentTime);
-
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.04, ctx.currentTime);
-
-        noise.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-        noise.start();
-
-        noiseNodeRef.current = gain;
-        setSoundEnabled(true);
-      } catch {
-        // AudioContext prevented by browser policy
-      }
-    } else {
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close().catch(() => {});
-        audioCtxRef.current = null;
-      }
-      setSoundEnabled(false);
-    }
-  };
-
-  // Replay ritual function if user wants to watch the ritual again from the start
-  const handleReplay = () => {
-    targetProgressRef.current = 0;
-    currentProgressRef.current = 0;
-    setPourProgress(0);
-    setIsCompleted(false);
-
-    // Smooth forward progression
-    setTimeout(() => {
-      targetProgressRef.current = 1;
-    }, 150);
-  };
 
   // 1. SCROLL LISTENER WITH STRICT FORWARD-ONLY PROGRESSION
   useEffect(() => {
@@ -173,7 +106,6 @@ export const PourRitualSection: React.FC = () => {
         currentProgressRef.current += (targetProgressRef.current - currentProgressRef.current) * 0.035 + 0.001;
         if (currentProgressRef.current >= 0.995) {
           currentProgressRef.current = 1.0;
-          setIsCompleted(true);
         }
         setPourProgress(currentProgressRef.current);
       }
@@ -521,7 +453,7 @@ export const PourRitualSection: React.FC = () => {
       ctx.fillStyle = 'rgba(209, 168, 90, 0.55)';
       ctx.font = '10px "Cinzel", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('KLOSTER · ANNO 1142', centerX, baseY + 18);
+      ctx.fillText('KLOSTER · CERVEZA ARTESANAL', centerX, baseY + 18);
 
       // -------------------------------------------------------------
       // 7. CHILLED CONDENSATION DROPLETS (Rocío de la Cripta)
@@ -562,31 +494,39 @@ export const PourRitualSection: React.FC = () => {
   const stepsData = [
     {
       num: 'I',
-      title: 'El Vínculo Térmico',
+      title: language === 'es' ? 'El Vínculo Térmico' : 'Cellar Temperature',
       spec: '12°C - 14°C',
       icon: Thermometer,
-      desc: 'El cáliz no se congela. Se atempera en frío de cripta para no anestesiar los ésteres de higo, dátil y madera.'
+      desc: language === 'es'
+        ? 'El cáliz no se congela. Se atempera en frío de cripta para no anestesiar los ésteres de higo, dátil y madera.'
+        : 'The chalice is never frozen. It is tempered at crypt cellar cold so as not to numb the esters of fig, date, and wood.'
     },
     {
       num: 'II',
-      title: 'La Inclinación a 45°',
-      spec: 'Flujo Continuo',
+      title: language === 'es' ? 'La Inclinación a 45°' : 'The 45° Incline',
+      spec: language === 'es' ? 'Flujo Continuo' : 'Continuous Flow',
       icon: Compass,
-      desc: 'La cerveza desciende suavemente por la curvatura del cristal, despertando la carbonatación sin agredirla.'
+      desc: language === 'es'
+        ? 'La cerveza desciende suavemente por la curvatura del cristal, despertando la carbonatación sin agredirla.'
+        : 'The beer glides smoothly along the curved crystal, gently awakening carbonation without aggression.'
     },
     {
       num: 'III',
-      title: 'La Coronación Monástica',
-      spec: 'Dos Dedos de Espuma',
+      title: language === 'es' ? 'La Coronación Monástica' : 'Monastic Crowning',
+      spec: language === 'es' ? 'Dos Dedos de Espuma' : 'Two Fingers of Foam',
       icon: ShieldCheck,
-      desc: 'Al llegar a tres cuartos, el cáliz se yergue perpendicular para forjar una cabeza densa y cremosa tipo merengue.'
+      desc: language === 'es'
+        ? 'Al llegar a tres cuartos, el cáliz se yergue perpendicular para forjar una cabeza densa y cremosa tipo merengue.'
+        : 'At three-quarters full, straighten the chalice upright to forge a thick, creamy meringue-like head.'
     },
     {
       num: 'IV',
-      title: 'El Encaje y el Reposo',
-      spec: 'Permanencia Belga',
+      title: language === 'es' ? 'El Encaje y el Reposo' : 'The Belgian Lace',
+      spec: language === 'es' ? 'Permanencia Belga' : 'Belgian Persistence',
       icon: Flame,
-      desc: 'La corona sella los aromas sagrados y firma cada trago con el legendario encaje de Bruselas en el cristal.'
+      desc: language === 'es'
+        ? 'La corona sella los aromas sagrados y firma cada trago con el legendario encaje de Bruselas en el cristal.'
+        : 'The crown seals sacred aromas and signatures each sip with legendary Brussels lace on the glass.'
     }
   ];
 
@@ -612,22 +552,26 @@ export const PourRitualSection: React.FC = () => {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto z-10">
+      <div className="relative site-container z-10">
         {/* HEADER BADGE & CALLOUT */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#D1A85A]/40 bg-[#17130F]/90 mb-4 shadow-[0_0_20px_rgba(209,168,90,0.15)]">
-            <Sparkles className="w-3.5 h-3.5 text-[#D1A85A]" />
+            <GothicCross className="w-3.5 h-3.5 text-[#D1A85A]" />
             <span className="font-cinzel text-[11px] uppercase tracking-[0.25em] text-[#D1A85A] font-semibold">
-              Liturgia de Servicio · Códice Monástico
+              {language === 'es' ? 'Liturgia de Servicio · Códice Monástico' : 'Service Liturgy · Monastic Codex'}
             </span>
           </div>
 
           <h2 className="font-gothic text-4xl sm:text-5xl lg:text-6xl text-[#F7F4EA] mb-4 tracking-tight">
-            El Ritual del Cáliz
+            {language === 'es' ? 'El Ritual del Cáliz' : 'The Chalice Ritual'}
           </h2>
 
           <p className="font-sans text-base sm:text-lg text-[#F7F4EA]/75 font-light leading-relaxed max-w-2xl mx-auto">
-            Servir una <span className="text-[#D1A85A] font-medium">Kloster</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.
+            {language === 'es' ? (
+              <>Servir una <span className="text-[#D1A85A] font-medium">Kloster</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.</>
+            ) : (
+              <>Serving a <span className="text-[#D1A85A] font-medium">Kloster</span> is not merely pouring a liquid; it is consecrating time. Handled with reverence, a gentle tilt, and an unwavering foam crown.</>
+            )}
           </p>
         </div>
 
@@ -638,7 +582,7 @@ export const PourRitualSection: React.FC = () => {
           <div className="lg:col-span-4 space-y-4 order-2 lg:order-1">
             <div className="p-6 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.7)]">
               <span className="font-cinzel text-[10px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block mb-4">
-                Pasos del Servicio Sacro
+                {language === 'es' ? 'Pasos del Servicio Sacro' : 'Sacred Service Steps'}
               </span>
 
               <div className="space-y-4">
@@ -686,12 +630,6 @@ export const PourRitualSection: React.FC = () => {
                 })}
               </div>
             </div>
-
-            {/* SOMMELIER ALLIANCE SUMMARY */}
-            <div className="p-4 rounded-lg bg-[#14100C]/70 border border-[#D1A85A]/15 text-xs text-[#F7F4EA]/60 flex items-center justify-between">
-              <span>Cristalería: Cáliz de boca ancha 330ml</span>
-              <span className="text-[#D1A85A]">Santa Cruz, Bolivia</span>
-            </div>
           </div>
 
           {/* CENTER: HIGH REALISM CINEMATIC CHALICE CANVAS */}
@@ -715,38 +653,27 @@ export const PourRitualSection: React.FC = () => {
               />
             </div>
 
-            {/* INTERACTIVE CONTROLS BAR (Audio + Replay) */}
-            <div className="flex items-center gap-4 mt-4 z-20">
-              <button
-                onClick={handleReplay}
-                className="flex items-center gap-2 px-4 py-2 rounded-md border border-[#D1A85A]/40 bg-[#17130F] hover:bg-[#D1A85A] hover:text-[#0C0C0C] text-[#F7F4EA] font-cinzel text-xs uppercase tracking-wider transition-all shadow-md group cursor-pointer"
-                title="Volver a reproducir la animación de vertido"
-              >
-                <RotateCcw className="w-3.5 h-3.5 text-[#D1A85A] group-hover:text-[#0C0C0C] transition-colors" />
-                Repetir Ritual
-              </button>
-
-              <button
-                onClick={toggleSound}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md border text-xs font-cinzel uppercase tracking-wider transition-all cursor-pointer ${
-                  soundEnabled
-                    ? 'border-[#D1A85A] bg-[#231A12] text-[#D1A85A] shadow-[0_0_15px_rgba(209,168,90,0.3)]'
-                    : 'border-white/10 bg-[#17130F] text-[#F7F4EA]/60 hover:text-[#F7F4EA]'
-                }`}
-                title="Activar efervescencia acústica de vertido"
-              >
-                {soundEnabled ? (
-                  <>
-                    <Volume2 className="w-3.5 h-3.5 text-[#D1A85A]" />
-                    Efervescencia Activa
-                  </>
-                ) : (
-                  <>
-                    <VolumeX className="w-3.5 h-3.5" />
-                    Sonido de Vertido
-                  </>
-                )}
-              </button>
+            {/* RECUADRO ADAPTADO AL CENTRO: ESPECIFICACIÓN DE CRISTALERÍA Y ORIGEN */}
+            <div className="w-full max-w-[460px] mt-4 p-4 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.7)] flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2.5">
+                <GothicCross className="w-4 h-4 text-[#D1A85A] flex-shrink-0" />
+                <div>
+                  <span className="font-cinzel text-xs font-semibold text-[#F7F4EA] block">
+                    {language === 'es' ? 'Cristalería: Cáliz de boca ancha 330ml' : 'Glassware: 330ml Wide-mouth Chalice'}
+                  </span>
+                  <span className="font-sans text-[11px] text-[#F7F4EA]/60 font-light">
+                    {language === 'es' ? 'Liturgia de abadía · Retención de aromas' : 'Abbey liturgy · Aroma retention'}
+                  </span>
+                </div>
+              </div>
+              <div className="text-right flex-shrink-0 border-l border-[#D1A85A]/20 pl-3">
+                <span className="font-cinzel text-[#D1A85A] text-xs uppercase tracking-wider font-semibold block">
+                  Santa Cruz
+                </span>
+                <span className="font-sans text-[10px] text-[#F7F4EA]/45 block">
+                  Bolivia
+                </span>
+              </div>
             </div>
           </div>
 
@@ -754,23 +681,23 @@ export const PourRitualSection: React.FC = () => {
           <div className="lg:col-span-3 space-y-4 order-3">
             <div className="p-6 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.7)]">
               <span className="font-cinzel text-[10px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block mb-4">
-                Norma de Cristalería
+                {language === 'es' ? 'Norma de Cristalería' : 'Glassware Standard'}
               </span>
 
               <div className="space-y-4 text-xs">
                 <div>
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">Geometría del Cáliz</span>
-                  <p className="text-[#F7F4EA] font-medium">Boca acampanada para oxigenar los ésteres de la levadura de abadía.</p>
+                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Geometría del Cáliz' : 'Chalice Geometry'}</span>
+                  <p className="text-[#F7F4EA] font-medium">{language === 'es' ? 'Boca acampanada para oxigenar los ésteres de la levadura de abadía.' : 'Flared rim engineered to aerate Belgian abbey yeast esters.'}</p>
                 </div>
 
                 <div className="border-t border-[#D1A85A]/15 pt-3">
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">Tallo & Aislamiento</span>
-                  <p className="text-[#F7F4EA] font-medium">Sujeción obligatoria por el fuste para evitar calentar el brebaje con la mano.</p>
+                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Tallo & Aislamiento' : 'Stem & Thermal Insulation'}</span>
+                  <p className="text-[#F7F4EA] font-medium">{language === 'es' ? 'Sujeción obligatoria por el fuste para evitar calentar el brebaje con la mano.' : 'Mandatory grip by the stem to prevent body heat transfer to the brew.'}</p>
                 </div>
 
                 <div className="border-t border-[#D1A85A]/15 pt-3">
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">Retención de Corona</span>
-                  <p className="text-[#D1A85A] font-medium">Espuma compacta que previene la oxidación de la malta caramelo.</p>
+                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Retención de Corona' : 'Head Retention'}</span>
+                  <p className="text-[#D1A85A] font-medium">{language === 'es' ? 'Espuma compacta que previene la oxidación de la malta caramelo.' : 'Dense foam blanket safeguarding caramel malts from oxidation.'}</p>
                 </div>
               </div>
             </div>
@@ -778,10 +705,14 @@ export const PourRitualSection: React.FC = () => {
             {/* PROTOCOL NOTICE FOR RESTAURANTS */}
             <div className="p-5 rounded-lg bg-gradient-to-br from-[#1C1611] to-[#120E0A] border border-[#D1A85A]/30">
               <span className="font-cinzel text-[10px] uppercase tracking-widest text-[#D1A85A] font-semibold block mb-2">
-                Protocolo Restaurantes & Hoteles
+                {language === 'es' ? 'Protocolo Restaurantes & Hoteles' : 'Hospitality & Venue Protocol'}
               </span>
               <p className="font-sans text-[12px] text-[#F7F4EA]/70 font-light leading-relaxed">
-                Cada caja de <strong className="text-[#F7F4EA]">Kloster</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.
+                {language === 'es' ? (
+                  <>Cada caja de <strong className="text-[#F7F4EA]">Kloster</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.</>
+                ) : (
+                  <>Each case of <strong className="text-[#F7F4EA]">Kloster</strong> for partner accounts in Bolivia includes table-service guidance and consecrated glassware for hospitality staff.</>
+                )}
               </p>
             </div>
           </div>
