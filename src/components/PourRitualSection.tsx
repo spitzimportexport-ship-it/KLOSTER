@@ -453,7 +453,7 @@ export const PourRitualSection: React.FC = () => {
       ctx.fillStyle = 'rgba(209, 168, 90, 0.55)';
       ctx.font = '10px "Cinzel", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('KLOSTER · CERVEZA ARTESANAL', centerX, baseY + 18);
+      ctx.fillText('KLOSTER® · CERVEZA ARTESANAL', centerX, baseY + 18);
 
       // -------------------------------------------------------------
       // 7. CHILLED CONDENSATION DROPLETS (Rocío de la Cripta)
@@ -568,9 +568,9 @@ export const PourRitualSection: React.FC = () => {
 
           <p className="font-sans text-base sm:text-lg text-[#F7F4EA]/75 font-light leading-relaxed max-w-2xl mx-auto">
             {language === 'es' ? (
-              <>Servir una <span className="text-[#D1A85A] font-medium">Kloster</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.</>
+              <>Servir una <span className="text-[#D1A85A] font-medium">Kloster®</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.</>
             ) : (
-              <>Serving a <span className="text-[#D1A85A] font-medium">Kloster</span> is not merely pouring a liquid; it is consecrating time. Handled with reverence, a gentle tilt, and an unwavering foam crown.</>
+              <>Serving a <span className="text-[#D1A85A] font-medium">Kloster®</span> is not merely pouring a liquid; it is consecrating time. Handled with reverence, a gentle tilt, and an unwavering foam crown.</>
             )}
           </p>
         </div>
@@ -709,9 +709,9 @@ export const PourRitualSection: React.FC = () => {
               </span>
               <p className="font-sans text-[12px] text-[#F7F4EA]/70 font-light leading-relaxed">
                 {language === 'es' ? (
-                  <>Cada caja de <strong className="text-[#F7F4EA]">Kloster</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.</>
+                  <>Cada caja de <strong className="text-[#F7F4EA]">Kloster®</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.</>
                 ) : (
-                  <>Each case of <strong className="text-[#F7F4EA]">Kloster</strong> for partner accounts in Bolivia includes table-service guidance and consecrated glassware for hospitality staff.</>
+                  <>Each case of <strong className="text-[#F7F4EA]">Kloster®</strong> for partner accounts in Bolivia includes table-service guidance and consecrated glassware for hospitality staff.</>
                 )}
               </p>
             </div>

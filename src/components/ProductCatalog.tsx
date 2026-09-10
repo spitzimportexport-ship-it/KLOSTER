@@ -149,7 +149,17 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                   </div>
 
                   <h3 className="font-gothic text-3xl sm:text-4xl text-[#F7F4EA] leading-none mb-1">
-                    {translatedBeer.name}
+                    {translatedBeer.name.includes('Kloster') ? (
+                      <>
+                        Kloster
+                        <span className="text-[0.32em] font-sans font-bold text-[#F7F4EA] align-super ml-0.5 select-none inline-block">
+                          ®
+                        </span>
+                        {translatedBeer.name.replace(/^Kloster\s*/, ' ')}
+                      </>
+                    ) : (
+                      translatedBeer.name
+                    )}
                   </h3>
 
                   <p className="font-cinzel text-xs text-[#F7F4EA]/60 tracking-wider mb-4">

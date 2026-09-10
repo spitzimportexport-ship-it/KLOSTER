@@ -54,7 +54,12 @@ function MainContent() {
               <GothicCross className="w-8 h-8 text-[#D1A85A]" />
             </div>
 
-            <span className="logo-text text-4xl text-[#F7F4EA] block mb-2">kloster</span>
+            <span className="logo-text text-4xl text-[#F7F4EA] inline-flex items-start justify-center mb-2">
+              kloster
+              <span className="text-[12px] font-sans font-bold text-[#F7F4EA] ml-0.5 -mt-0.5 select-none drop-shadow-sm">
+                ®
+              </span>
+            </span>
             <span className="font-cinzel text-[10px] uppercase tracking-[0.26em] text-[#D1A85A] font-bold block mb-4">
               {t('age.title')}
             </span>

@@ -46,7 +46,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
         : language === 'es' ? 'Consulta o duda general' : 'General Inquiry';
 
     const messageLines = [
-      `*Solicitud de Contacto — Kloster Cerveza Artesanal*`,
+      `*Solicitud de Contacto — Kloster® Cerveza Artesanal*`,
       `• *Motivo:* ${reasonLabel}`,
       name.trim() ? `• *Nombre / Contacto:* ${name.trim()}` : null,
       businessOrCity.trim() ? `• *Establecimiento / Ciudad:* ${businessOrCity.trim()}` : null,

@@ -9,7 +9,7 @@ export const OFFICIAL_BOTTLE_IMAGE_URL = lagerBottleImg;
 export const BEER_VARIANTS: BeerVariant[] = [
   {
     id: 'lager',
-    name: 'Kloster Lager',
+    name: 'Kloster® Lager',
     subname: 'Cerveza Artesanal Lager · 300 ml',
     volume: '300 ml',
     abv: '5.0%',
@@ -35,7 +35,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
   },
   {
     id: 'vainilla',
-    name: 'Kloster Vainilla',
+    name: 'Kloster® Vainilla',
     subname: 'Cerveza Artesanal Vainilla · 300 ml',
     volume: '300 ml',
     abv: '5.0%',
@@ -60,7 +60,7 @@ export const BEER_VARIANTS: BeerVariant[] = [
   },
   {
     id: 'roble',
-    name: 'Kloster Roble',
+    name: 'Kloster® Roble',
     subname: 'Cerveza Artesanal en Roble · 300 ml',
     volume: '300 ml',
     abv: '5.0%',
@@ -81,11 +81,11 @@ export const BEER_VARIANTS: BeerVariant[] = [
       'Guisos tradicionales en cazuela de hierro'
     ],
     oakTime: '60 días de contacto y maduración en roble',
-    servingGlass: 'Cáliz ceremonial Kloster'
+    servingGlass: 'Cáliz ceremonial Kloster®'
   },
   {
     id: 'hydrate',
-    name: 'Kloster Hydrate',
+    name: 'Kloster® Hydrate',
     subname: 'Cerveza Sin Alcohol · 0.0% · 300 ml',
     volume: '300 ml',
     abv: '0.0%',

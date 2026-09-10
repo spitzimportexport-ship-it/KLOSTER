@@ -45,8 +45,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             <GothicCross className="w-4 h-4 text-[#D1A85A]" />
           </div>
           <div className="flex flex-col text-left">
-            <span className="logo-text text-2xl leading-none tracking-normal">
+            <span className="logo-text text-2xl leading-none tracking-normal inline-flex items-start">
               kloster
+              <span className="text-[9px] font-sans font-bold text-[#F7F4EA] ml-0.5 -mt-0.5 select-none drop-shadow-sm">
+                ®
+              </span>
             </span>
             <span className="font-cinzel text-[8px] uppercase tracking-[0.28em] text-[#D1A85A] font-semibold">
               {t('nav.brandSubtitle')}

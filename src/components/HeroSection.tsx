@@ -45,8 +45,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onDiscover, onOpenCont
             />
           </div>
           <div className="flex flex-col text-left">
-            <span className="logo-text text-2xl sm:text-3xl text-[#F7F4EA] leading-none tracking-normal font-normal">
+            <span className="logo-text text-2xl sm:text-3xl text-[#D4AF37] leading-none tracking-normal font-normal inline-flex items-start">
               kloster
+              <span className="text-[9px] sm:text-[10px] font-sans font-bold text-[#D4AF37] ml-0.5 -mt-0.5 select-none drop-shadow-sm">
+                ®
+              </span>
             </span>
             <span className="font-cinzel text-[8px] sm:text-[9px] uppercase tracking-[0.26em] text-[#D4AF37] font-semibold">
               {t('nav.brandSubtitle')}

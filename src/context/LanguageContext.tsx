@@ -25,7 +25,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.ctaCollection': 'Descubrir la Colección',
     'hero.ctaContact': 'Contacto',
     'hero.relicHeader': 'RELIQUIA DE ABADÍA',
-    'hero.archCaptionTitle': 'Kloster Cervecería Artesanal',
+    'hero.archCaptionTitle': 'Kloster® Cervecería Artesanal',
     'hero.archCaptionSub': 'Botella 300 ml · Colección de 4 Variedades',
     'hero.statAbv': 'Vol. Alcohol',
     'hero.statMalts': 'Maltas Nobles',
@@ -48,7 +48,7 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.pairingBadge': 'Maridaje',
 
     // Beers details
-    'beer.lager.name': 'Kloster Lager',
+    'beer.lager.name': 'Kloster® Lager',
     'beer.lager.sub': 'Cerveza Artesanal Lager · 300 ml',
     'beer.lager.tag': 'Base · Fresca · Equilibrada',
     'beer.lager.desc': 'Cerveza dorada brillante de cuerpo equilibrado y espuma cremosa, elaborada con maltas nobles y lúpulos continentales bajo reposo en frío.',
@@ -58,7 +58,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.lager.p2': 'Quesos curados (Gouda, Parmigiano)',
     'beer.lager.p3': 'Charcutería artesanal de campo',
 
-    'beer.vainilla.name': 'Kloster Vainilla',
+    'beer.vainilla.name': 'Kloster® Vainilla',
     'beer.vainilla.sub': 'Cerveza Artesanal Vainilla · 300 ml',
     'beer.vainilla.tag': 'Aromática · Suave · Sublime',
     'beer.vainilla.desc': 'Fusión delicada de malta dorada y vainas enteras de vainilla seleccionadas, maceradas en frío para un perfil aromático sedoso y envolvente.',
@@ -68,7 +68,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.vainilla.p2': 'Crème brûlée tradicional y postres',
     'beer.vainilla.p3': 'Quesos brie y camembert artesanal',
 
-    'beer.roble.name': 'Kloster Roble',
+    'beer.roble.name': 'Kloster® Roble',
     'beer.roble.sub': 'Cerveza Artesanal en Roble · 300 ml',
     'beer.roble.tag': 'Robusta · Envejecida · Noble',
     'beer.roble.desc': 'Madurada en contacto con duelas de roble tostado medio. Complejidad amaderada, notas a caramelo oscuro y taninos aterciopelados.',
@@ -78,7 +78,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.roble.p2': 'Guisos de caza y carnes ahumadas',
     'beer.roble.p3': 'Chocolate negro con más del 70% de cacao',
 
-    'beer.hydrate.name': 'Kloster Hydrate',
+    'beer.hydrate.name': 'Kloster® Hydrate',
     'beer.hydrate.sub': 'Cerveza Artesanal 0.0% Sin Alcohol · 300 ml',
     'beer.hydrate.tag': '0.0% Alcohol · Isotónica · Pura',
     'beer.hydrate.desc': 'Toda la nobleza del grano malteado y lúpulo aromático en una receta 0.0% alcohol, rica en electrolitos naturales y de trago ultra refrescante.',
@@ -89,23 +89,23 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.hydrate.p3': 'Post-entrenamiento o hidratación diurna',
 
     // Manifesto / Quiénes Somos
-    'manifesto.badge': 'Cervecería Kloster',
+    'manifesto.badge': 'Cervecería Kloster®',
     'manifesto.title': 'Quiénes Somos',
     'manifesto.sub': 'Paciencia, Silencio y Tiempo',
     'manifesto.lead': 'Una cervecería artesanal boliviana inspirada en la solemnidad monástica, donde cada receta se elabora sin prisas ni atajos.',
     'manifesto.r1badge': 'La Filosofía del Reposo',
     'manifesto.r1title': 'El Arte de Esperar el Momento Exacto',
-    'manifesto.r1p1': 'En un entorno saturado de inmediatez y producción a escala masiva, Kloster defiende el silencio de la maduración pausada. Creemos que la cerveza no se fuerza: se acompaña.',
+    'manifesto.r1p1': 'En un entorno saturado de inmediatez y producción a escala masiva, Kloster® defiende el silencio de la maduración pausada. Creemos que la cerveza no se fuerza: se acompaña.',
     'manifesto.r1p2': 'Nuestras recetas descansan a bajas temperaturas hasta que las notas de malta y levadura logran un balance suave, redondo y sin asperezas, respetando la pureza de cada ingrediente noble.',
     'manifesto.tagFerment': 'Fermentación controlada',
     'manifesto.tagNoChem': 'Sin aceleradores químicos',
     'manifesto.tagNobleMalts': 'Maltas nobles seleccionadas',
     'manifesto.r2badge': 'Oficio y Origen Boliviano',
     'manifesto.r2title': 'Maestría Cervecera de Bolivian Brew Company',
-    'manifesto.r2p1': 'Elaborada y envasada en Santa Cruz con registro oficial SENASAG, Kloster combina la herencia conventual europea con la pujanza y calidez de nuestra tierra.',
+    'manifesto.r2p1': 'Elaborada y envasada en Santa Cruz con registro oficial SENASAG, Kloster® combina la herencia conventual europea con la pujanza y calidez de nuestra tierra.',
     'manifesto.r2p2': 'Diseñada para la mesa gastronómica, cada botella de 300 ml está concebida para maridar con cortes de carne, quesos madurados y sobremesas compartidas en copas de pie alto.',
     'manifesto.quote': '"No hay prisa en el rezo, ni en la buena cerveza."',
-    'manifesto.quoteAuthor': 'Kloster Cerveza Artesanal',
+    'manifesto.quoteAuthor': 'Kloster® Cerveza Artesanal',
 
     // Pour Ritual
     'ritual.badge': 'El Cáliz de la Abadía',
@@ -130,7 +130,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.pillar1title': 'Trato Directo de Fábrica',
     'contact.pillar1desc': 'Sin intermediarios. Acceso a tarifas preferenciales por volumen y lotes frescos.',
     'contact.pillar2title': 'Cálices Oficiales & Servicio',
-    'contact.pillar2desc': 'Dotación de cristalería de pie alto Kloster y asesoramiento en maridaje.',
+    'contact.pillar2desc': 'Dotación de cristalería de pie alto Kloster® y asesoramiento en maridaje.',
     'contact.pillar3title': 'Envíos a Nivel Nacional',
     'contact.pillar3desc': 'Despacho a Santa Cruz, La Paz, Cochabamba, Sucre, Tarija y toda Bolivia.',
     'contact.phoneLabel': 'Línea Telefónica Directa',
@@ -211,7 +211,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.ctaCollection': 'Discover the Collection',
     'hero.ctaContact': 'Contact',
     'hero.relicHeader': 'ABBEY RELIC',
-    'hero.archCaptionTitle': 'Kloster Craft Brewery',
+    'hero.archCaptionTitle': 'Kloster® Craft Brewery',
     'hero.archCaptionSub': '300 ml Bottle · 4 Variety Collection',
     'hero.statAbv': 'ABV Alcohol',
     'hero.statMalts': 'Noble Malts',
@@ -234,7 +234,7 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.pairingBadge': 'Pairing',
 
     // Beers details
-    'beer.lager.name': 'Kloster Lager',
+    'beer.lager.name': 'Kloster® Lager',
     'beer.lager.sub': 'Craft Lager Beer · 300 ml',
     'beer.lager.tag': 'Core · Fresh · Balanced',
     'beer.lager.desc': 'Bright golden beer with a balanced body and creamy head, brewed with noble malts and continental hops under cold maturation.',
@@ -244,7 +244,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.lager.p2': 'Aged cheeses (Gouda, Parmigiano)',
     'beer.lager.p3': 'Artisanal country charcuterie',
 
-    'beer.vainilla.name': 'Kloster Vanilla',
+    'beer.vainilla.name': 'Kloster® Vanilla',
     'beer.vainilla.sub': 'Craft Vanilla Beer · 300 ml',
     'beer.vainilla.tag': 'Aromatic · Velvety · Sublime',
     'beer.vainilla.desc': 'Delicate fusion of golden malt and whole selected vanilla beans, cold-macerated for a silky, enveloping aromatic profile.',
@@ -254,7 +254,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.vainilla.p2': 'Traditional crème brûlée and custard desserts',
     'beer.vainilla.p3': 'Artisanal brie and camembert cheese',
 
-    'beer.roble.name': 'Kloster Oak',
+    'beer.roble.name': 'Kloster® Oak',
     'beer.roble.sub': 'Oak-Aged Craft Beer · 300 ml',
     'beer.roble.tag': 'Robust · Cellar-Aged · Noble',
     'beer.roble.desc': 'Aged in contact with medium-toasted oak staves. Woody complexity, deep caramel notes, and velvety tannins.',
@@ -264,7 +264,7 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.roble.p2': 'Game stews and smoked meats',
     'beer.roble.p3': '70%+ dark artisanal chocolate',
 
-    'beer.hydrate.name': 'Kloster Hydrate',
+    'beer.hydrate.name': 'Kloster® Hydrate',
     'beer.hydrate.sub': '0.0% Non-Alcoholic Craft Beer · 300 ml',
     'beer.hydrate.tag': '0.0% Alcohol · Isotonic · Pure',
     'beer.hydrate.desc': 'All the richness of malted grain and aromatic hops in a 0.0% alcohol recipe, rich in natural electrolytes and intensely refreshing.',
@@ -275,23 +275,23 @@ const translations: Record<Language, Record<string, string>> = {
     'beer.hydrate.p3': 'Post-workout or daytime refreshment',
 
     // Manifesto / Quiénes Somos
-    'manifesto.badge': 'Kloster Brewery',
+    'manifesto.badge': 'Kloster® Brewery',
     'manifesto.title': 'About Us',
     'manifesto.sub': 'Patience, Silence, and Time',
     'manifesto.lead': 'A Bolivian craft brewery inspired by monastic solemnity, where each recipe is crafted without haste or shortcuts.',
     'manifesto.r1badge': 'The Philosophy of Rest',
     'manifesto.r1title': 'The Art of Waiting for the Exact Moment',
-    'manifesto.r1p1': 'In an environment saturated with rush and mass industrial output, Kloster stands for the silence of unhurried maturation. We believe beer is not rushed: it is accompanied.',
+    'manifesto.r1p1': 'In an environment saturated with rush and mass industrial output, Kloster® stands for the silence of unhurried maturation. We believe beer is not rushed: it is accompanied.',
     'manifesto.r1p2': 'Our recipes rest at cold cellar temperatures until malt and yeast harmonize into a smooth, rounded balance without harshness, honoring pure noble ingredients.',
     'manifesto.tagFerment': 'Controlled fermentation',
     'manifesto.tagNoChem': 'No chemical accelerators',
     'manifesto.tagNobleMalts': 'Selected noble malts',
     'manifesto.r2badge': 'Bolivian Craft & Heritage',
     'manifesto.r2title': 'Brewing Mastery by Bolivian Brew Company',
-    'manifesto.r2p1': 'Brewed and packaged in Santa Cruz under official SENASAG certification, Kloster blends European convent heritage with the energy and warmth of our land.',
+    'manifesto.r2p1': 'Brewed and packaged in Santa Cruz under official SENASAG certification, Kloster® blends European convent heritage with the energy and warmth of our land.',
     'manifesto.r2p2': 'Designed for the culinary table, every 300 ml bottle is made to pair with choice cuts of meat, aged cheeses, and memorable evenings in high-stem goblets.',
     'manifesto.quote': '"There is no haste in prayer, nor in good beer."',
-    'manifesto.quoteAuthor': 'Kloster Craft Beer',
+    'manifesto.quoteAuthor': 'Kloster® Craft Beer',
 
     // Pour Ritual
     'ritual.badge': 'The Abbey Chalice',
@@ -316,7 +316,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.pillar1title': 'Direct Brewery Pricing',
     'contact.pillar1desc': 'No middlemen. Access preferential wholesale pricing and fresh cellar batches.',
     'contact.pillar2title': 'Official Chalices & Service',
-    'contact.pillar2desc': 'Kloster high-stem glassware supply and staff sommelier pairing training.',
+    'contact.pillar2desc': 'Kloster® high-stem glassware supply and staff sommelier pairing training.',
     'contact.pillar3title': 'Nationwide Delivery',
     'contact.pillar3desc': 'Careful dispatch to Santa Cruz, La Paz, Cochabamba, Sucre, Tarija and beyond.',
     'contact.phoneLabel': 'Direct Telephone Line',

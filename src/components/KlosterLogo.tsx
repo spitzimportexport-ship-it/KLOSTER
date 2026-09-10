@@ -52,10 +52,13 @@ export const KlosterLogo: React.FC<KlosterLogoProps> = ({
       {/* Gothic / Blackletter Brand Wordmark */}
       <div className="relative group">
         <h1
-          className={`logo-text font-normal leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] tracking-tight ${textSizes[size]}`}
+          className={`logo-text font-normal leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] tracking-tight inline-flex items-start ${textSizes[size]}`}
           style={{ textShadow: '0 2px 10px rgba(12,12,12,0.95), 0 0 1px #D1A85A' }}
         >
           kloster
+          <span className="text-[0.28em] font-sans font-bold text-[#F7F4EA] ml-0.5 -mt-[0.08em] select-none leading-none drop-shadow-sm">
+            ®
+          </span>
         </h1>
         {/* Subtle gold underline shimmer */}
         <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-[1px] bg-gradient-to-r from-transparent via-[#D1A85A] to-transparent group-hover:w-full transition-all duration-700" />

@@ -37,7 +37,7 @@ export const B2BAllocationSection: React.FC<B2BAllocationSectionProps> = ({ sele
         : language === 'es' ? 'Duda o Consulta General' : 'General Inquiry';
 
     const text = encodeURIComponent(
-      `*Contacto Directo Kloster Cervecería*\n` +
+      `*Contacto Directo Kloster® Cervecería*\n` +
       `• *Motivo:* ${reasonLabel}\n` +
       (name ? `• *Nombre / Negocio:* ${name}\n` : '') +
       (city ? `• *Ciudad:* ${city}\n` : '') +

@@ -83,7 +83,17 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
               </div>
 
               <span className="font-gothic text-3xl sm:text-4xl text-[#F7F4EA] block leading-tight">
-                {beer.name}
+                {beer.name.includes('Kloster') ? (
+                  <>
+                    Kloster
+                    <span className="text-[0.32em] font-sans font-bold text-[#F7F4EA] align-super ml-0.5 select-none inline-block">
+                      ®
+                    </span>
+                    {beer.name.replace(/^Kloster\s*/, ' ')}
+                  </>
+                ) : (
+                  beer.name
+                )}
               </span>
               <span className="font-cinzel text-[11px] uppercase tracking-wider text-[#D1A85A] font-semibold">
                 {beer.subname} · {beer.volume}

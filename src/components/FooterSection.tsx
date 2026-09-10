@@ -50,12 +50,12 @@ export const FooterSection: React.FC = () => {
               {t('footer.col2Title')}
             </h4>
             <ul className="space-y-2 text-xs font-cinzel text-[#F7F4EA]/70">
-              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster Lager (5.0% Vol.)</a></li>
-              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster Vainilla (5.0% Vol.)</a></li>
-              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster Roble (5.0% Vol.)</a></li>
+              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster® Lager (5.0% Vol.)</a></li>
+              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster® Vainilla (5.0% Vol.)</a></li>
+              <li><a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">Kloster® Roble (5.0% Vol.)</a></li>
               <li>
                 <a href="#catalogo" className="hover:text-[#D1A85A] transition-colors">
-                  {language === 'es' ? 'Kloster Hydrate (0.0% Sin Alcohol)' : 'Kloster Hydrate (0.0% Non-Alcoholic)'}
+                  {language === 'es' ? 'Kloster® Hydrate (0.0% Sin Alcohol)' : 'Kloster® Hydrate (0.0% Non-Alcoholic)'}
                 </a>
               </li>
             </ul>
@@ -117,7 +117,7 @@ export const FooterSection: React.FC = () => {
 
           <div className="text-right">
             <p className="font-cinzel text-[10px] uppercase tracking-wider">
-              © {new Date().getFullYear()} KLOSTER CERVEZA ARTESANAL. {language === 'es' ? 'TODOS LOS DERECHOS RESERVADOS.' : 'ALL RIGHTS RESERVED.'}
+              © {new Date().getFullYear()} KLOSTER® CERVEZA ARTESANAL. {language === 'es' ? 'TODOS LOS DERECHOS RESERVADOS.' : 'ALL RIGHTS RESERVED.'}
             </p>
           </div>
         </div>
