@@ -65,7 +65,30 @@ export const PourRitualSection: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Initial check
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Fallback con IntersectionObserver para móviles (iOS Safari / WebKit)
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined' && sectionRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              if (!hasTriggeredRef.current) {
+                hasTriggeredRef.current = true;
+                targetProgressRef.current = 1.0;
+              }
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   // 2. CANVAS RENDERING ENGINE (Ultra-Cinematic Monastic Chalice Pour)
@@ -112,22 +135,40 @@ export const PourRitualSection: React.FC = () => {
 
       const p = currentProgressRef.current;
 
-      // Handle HiDPI
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Handle HiDPI & Retina Displays with exact transform reset
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
 
-      if (canvas.width !== width * dpr || canvas.height !== height * dpr) {
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
+      if (width <= 0 || height <= 0) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
+
+      const pixelWidth = Math.round(width * dpr);
+      const pixelHeight = Math.round(height * dpr);
+
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
       }
 
       ctx.save();
-      ctx.scale(dpr, dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
       const centerX = width * 0.5;
       const centerY = height * 0.54;
+
+      // Adaptación mobile precisa: en pantallas pequeñas (< 440px), escala proporcionalmente
+      // para que el cáliz, el texto base y la botella queden holgados y perfectamente visibles.
+      // En PC y tablet (width >= 440px), baseScale es 1.0 (100% idéntico e intacto).
+      const baseScale = width < 440 ? Math.max(0.74, width / 440) : 1.0;
+      if (baseScale !== 1.0) {
+        ctx.translate(centerX, centerY);
+        ctx.scale(baseScale, baseScale);
+        ctx.translate(-centerX, -centerY);
+      }
 
       // --- CHALICE GEOMETRY CONSTANTS ---
       const rimWidth = 190;
@@ -479,7 +520,8 @@ export const PourRitualSection: React.FC = () => {
         });
       }
 
-      ctx.restore();
+      ctx.restore(); // Restores foreground chalice state
+      ctx.restore(); // Restores top-level save & baseScale/setTransform
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -648,8 +690,13 @@ export const PourRitualSection: React.FC = () => {
               {/* The Master Ritual Canvas */}
               <canvas
                 ref={canvasRef}
-                className="w-full h-full object-contain relative z-10"
-                style={{ touchAction: 'none' }}
+                className="w-full h-full object-contain relative z-10 cursor-pointer"
+                style={{ touchAction: 'pan-y' }}
+                onClick={() => {
+                  hasTriggeredRef.current = true;
+                  targetProgressRef.current = 1.0;
+                }}
+                aria-label="Cáliz sagrado de degustación Kloster"
               />
             </div>
 
