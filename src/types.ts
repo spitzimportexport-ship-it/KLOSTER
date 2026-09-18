@@ -11,7 +11,9 @@ export interface BeerVariant {
   bottleLabelColor: string;
   tagline: string;
   description: string;
+  apariencia: string;
   aroma: string;
+  sabor: string;
   boca: string;
   maridaje: string[];
   oakTime?: string;

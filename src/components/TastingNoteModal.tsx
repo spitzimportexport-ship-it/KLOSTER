@@ -1,7 +1,7 @@
 import React from 'react';
 import { BeerVariant } from '../types';
 import { GothicCross } from './MonkIsotype';
-import { X, Utensils, Wine, MessageSquare } from 'lucide-react';
+import { X, Utensils, Wine, MessageSquare, Eye, Sparkles, BookOpen } from 'lucide-react';
 import { OFFICIAL_BOTTLE_IMAGE_URL } from '../data/beerData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -39,7 +39,7 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
     >
       <div
         className="relative w-full max-w-3xl max-h-[92vh] flex flex-col bg-gradient-to-b from-[#18130E] via-[#120E0A] to-[#0A0A0A] border border-[#D1A85A]/40 rounded-xl shadow-[0_25px_70px_rgba(0,0,0,0.95)] overflow-hidden"
-        style={{ width: 'clamp(320px, 94%, 820px)' }}
+        style={{ width: 'clamp(320px, 94%, 840px)' }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
@@ -52,7 +52,7 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
         </button>
 
         {/* Scrollable content area */}
-        <div className="overflow-y-auto p-6 sm:p-8 flex-1">
+        <div className="overflow-y-auto p-5 sm:p-7 flex-1">
           
           {/* Header */}
           <div className="flex items-center gap-2 mb-4">
@@ -63,10 +63,10 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
           </div>
 
           {/* 2-COLUMN DESKTOP LAYOUT */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
             
-            {/* Columna Izquierda: Gran Botella y Métricas Principales */}
-            <div className="flex flex-col items-center justify-center text-center p-4 rounded-lg bg-[#0C0C0C]/80 border border-[#D1A85A]/20">
+            {/* Columna Izquierda: Botella Oficial y Métricas Técnicas */}
+            <div className="flex flex-col items-center justify-center text-center p-2 md:sticky md:top-0">
               <div className="relative w-full aspect-[3/4] max-h-72 flex items-center justify-center overflow-hidden mb-3">
                 <div
                   className="absolute w-44 h-44 rounded-full blur-2xl opacity-20 pointer-events-none"
@@ -83,91 +83,111 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
               </div>
 
               <span className="font-gothic text-3xl sm:text-4xl text-[#F7F4EA] block leading-tight">
-                {beer.name.includes('Kloster') ? (
-                  <>
-                    Kloster
-                    <span className="text-[0.32em] font-sans font-bold text-[#F7F4EA] align-super ml-0.5 select-none inline-block">
-                      ®
-                    </span>
-                    {beer.name.replace(/^Kloster\s*/, ' ')}
-                  </>
-                ) : (
-                  beer.name
-                )}
+                {beer.name}
               </span>
               <span className="font-cinzel text-[11px] uppercase tracking-wider text-[#D1A85A] font-semibold">
                 {beer.subname} · {beer.volume}
               </span>
 
+              {/* Datos técnicos mostrados por separado: Alcohol (ABV), Amargor (IBU) y Temp. Servicio */}
               <div className="w-full mt-3 pt-3 border-t border-[#D1A85A]/15 grid grid-cols-3 gap-2 text-center text-xs">
                 <div>
                   <span className="text-[9px] text-[#F7F4EA]/50 uppercase block font-cinzel">{t('modal.alcohol')}</span>
-                  <span className="font-bold text-[#D1A85A]">{beer.abv}</span>
+                  <span className="font-bold text-[#D1A85A] text-sm">{beer.abv}</span>
                 </div>
                 <div>
                   <span className="text-[9px] text-[#F7F4EA]/50 uppercase block font-cinzel">{t('modal.bitterness')}</span>
-                  <span className="font-bold text-[#D1A85A]">{beer.ibu} IBU</span>
+                  <span className="font-bold text-[#D1A85A] text-sm">{beer.ibu} IBU</span>
                 </div>
                 <div>
                   <span className="text-[9px] text-[#F7F4EA]/50 uppercase block font-cinzel">{t('modal.service')}</span>
-                  <span className="font-bold text-[#F7F4EA]">{beer.temp}</span>
+                  <span className="font-bold text-[#F7F4EA] text-sm">{beer.temp}</span>
                 </div>
               </div>
             </div>
 
-            {/* Columna Derecha: Información Sensorial Resumida */}
-            <div className="space-y-4 text-left">
-              <div>
+            {/* Columna Derecha: Ficha en orden exacto solicitado (layout limpio sin cuadritos) */}
+            <div className="space-y-4 text-left text-xs">
+              
+              {/* Encabezado */}
+              <div className="pb-2 border-b border-[#D1A85A]/20">
                 <span className="font-cinzel text-xs uppercase tracking-[0.2em] text-[#D1A85A] block mb-1">
                   {beer.tagline}
                 </span>
                 <h3 id="tasting-modal-title" className="font-cinzel text-xl sm:text-2xl font-bold text-[#F7F4EA]">
                   {t('modal.profileTitle')}
                 </h3>
-                <p className="font-sans text-xs sm:text-sm text-[#F7F4EA]/80 font-light leading-relaxed mt-2">
+              </div>
+
+              {/* 1. Descripción */}
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <div className="flex items-center gap-2 mb-1.5 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
+                  <BookOpen className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <span>{t('modal.descTitle')}</span>
+                </div>
+                <p className="font-sans text-xs sm:text-sm text-[#F7F4EA]/90 font-light leading-relaxed">
                   {beer.description}
                 </p>
               </div>
 
-              {/* Sensorial resumido */}
-              <div className="space-y-2.5 pt-1 text-xs">
-                <div className="p-3 rounded bg-[#17130F] border border-white/5">
-                  <div className="flex items-center gap-1.5 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[10px] font-bold">
-                    <GothicCross className="w-3.5 h-3.5" />
-                    <span>{t('modal.aromaTitle')}</span>
-                  </div>
-                  <p className="text-[#F7F4EA]/75 font-light leading-relaxed">
-                    {beer.aroma}
-                  </p>
+              {/* 2. Apariencia */}
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <div className="flex items-center gap-2 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
+                  <Eye className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <span>{t('modal.appearanceTitle')}</span>
                 </div>
-
-                <div className="p-3 rounded bg-[#17130F] border border-white/5">
-                  <div className="flex items-center gap-1.5 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[10px] font-bold">
-                    <Wine className="w-3.5 h-3.5" />
-                    <span>{t('modal.palateTitle')}</span>
-                  </div>
-                  <p className="text-[#F7F4EA]/75 font-light leading-relaxed">
-                    {beer.boca}
-                  </p>
-                </div>
+                <p className="text-[#F7F4EA]/85 font-light leading-relaxed">
+                  {beer.apariencia}
+                </p>
               </div>
 
-              {/* Maridaje */}
-              <div>
-                <div className="flex items-center gap-1.5 mb-1.5 text-[#F7F4EA]/80 font-cinzel text-[10px] uppercase tracking-wider font-semibold">
-                  <Utensils className="w-3 h-3 text-[#D1A85A]" />
+              {/* 3. Aroma y bouquet */}
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <div className="flex items-center gap-2 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
+                  <GothicCross className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <span>{t('modal.aromaTitle')}</span>
+                </div>
+                <p className="text-[#F7F4EA]/85 font-light leading-relaxed">
+                  {beer.aroma}
+                </p>
+              </div>
+
+              {/* 4. Sabor */}
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <div className="flex items-center gap-2 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <span>{t('modal.flavorTitle')}</span>
+                </div>
+                <p className="text-[#F7F4EA]/85 font-light leading-relaxed">
+                  {beer.sabor}
+                </p>
+              </div>
+
+              {/* 5. Sensación en boca */}
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <div className="flex items-center gap-2 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
+                  <Wine className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <span>{t('modal.palateTitle')}</span>
+                </div>
+                <p className="text-[#F7F4EA]/85 font-light leading-relaxed">
+                  {beer.boca}
+                </p>
+              </div>
+
+              {/* 6. Maridaje recomendado */}
+              <div className="pt-1">
+                <div className="flex items-center gap-2 mb-2 text-[#D1A85A] font-cinzel text-[11px] uppercase tracking-wider font-bold">
+                  <Utensils className="w-3.5 h-3.5 text-[#D1A85A]" />
                   <span>{t('modal.pairingTitle')}</span>
                 </div>
-                <div className="flex flex-wrap gap-1.5">
+                <ul className="space-y-1.5 text-xs text-[#F7F4EA]/85 font-light">
                   {beer.maridaje.map((item, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 rounded bg-[#17130F] border border-[#D1A85A]/20 text-[11px] text-[#F7F4EA]/75 font-sans"
-                    >
-                      {item}
-                    </span>
+                    <li key={idx} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D1A85A] shrink-0 opacity-80" />
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
             </div>
@@ -213,3 +233,4 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
     </div>
   );
 };
+

@@ -176,9 +176,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onDiscover, onOpenCont
             </span>
 
             {/* Gran Titular Tipográfico */}
-            <h1 className="hero-title tracking-tight m-0">
-              {t('hero.title1')}<br />
-              <span className="text-gold-gradient italic font-serif">{t('hero.title2')}</span>
+            <h1 className="hero-title tracking-tight m-0 leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+              <span className="block">{t('hero.title1')}</span>
+              <span className="text-gold-gradient italic font-serif block mt-1 sm:mt-1.5 drop-shadow-[0_2px_14px_rgba(209,168,90,0.3)]">
+                {t('hero.title2')}
+              </span>
             </h1>
 
             {/* Cuerpo de Copy Funcional y Claro */}

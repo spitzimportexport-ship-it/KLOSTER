@@ -494,7 +494,7 @@ export const PourRitualSection: React.FC = () => {
       ctx.fillStyle = 'rgba(209, 168, 90, 0.55)';
       ctx.font = '10px "Cinzel", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('KLOSTER® · CERVEZA ARTESANAL', centerX, baseY + 18);
+      ctx.fillText('KLOSTER · CERVEZA ARTESANAL', centerX, baseY + 18);
 
       // -------------------------------------------------------------
       // 7. CHILLED CONDENSATION DROPLETS (Rocío de la Cripta)
@@ -610,67 +610,60 @@ export const PourRitualSection: React.FC = () => {
 
           <p className="font-sans text-base sm:text-lg text-[#F7F4EA]/75 font-light leading-relaxed max-w-2xl mx-auto">
             {language === 'es' ? (
-              <>Servir una <span className="text-[#D1A85A] font-medium">Kloster®</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.</>
+              <>Servir una <span className="text-[#D1A85A] font-medium">Kloster</span> no es verter un líquido; es consagrar el tiempo. La botella se entrega con reverencia, inclinación y una corona inquebrantable.</>
             ) : (
-              <>Serving a <span className="text-[#D1A85A] font-medium">Kloster®</span> is not merely pouring a liquid; it is consecrating time. Handled with reverence, a gentle tilt, and an unwavering foam crown.</>
+              <>Serving a <span className="text-[#D1A85A] font-medium">Kloster</span> is not merely pouring a liquid; it is consecrating time. Handled with reverence, a gentle tilt, and an unwavering foam crown.</>
             )}
           </p>
         </div>
 
         {/* MAIN INTERACTIVE STAGE */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* LEFT: STEP SELECTOR & LITURGICAL TIMELINE */}
-          <div className="lg:col-span-4 space-y-4 order-2 lg:order-1">
-            <div className="p-6 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.7)]">
-              <span className="font-cinzel text-[10px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block mb-4">
+          <div className="lg:col-span-4 text-left order-2 lg:order-1">
+            <div className="pb-3 border-b border-[#D1A85A]/25 mb-4">
+              <span className="font-cinzel text-[11px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block">
                 {language === 'es' ? 'Pasos del Servicio Sacro' : 'Sacred Service Steps'}
               </span>
+            </div>
 
-              <div className="space-y-4">
-                {stepsData.map((step, idx) => {
-                  const Icon = step.icon;
-                  const isActive = currentStep === idx;
-                  const isPassed = currentStep > idx;
+            <div className="space-y-1">
+              {stepsData.map((step, idx) => {
+                const isActive = currentStep === idx;
+                const isPassed = currentStep > idx;
 
-                  return (
-                    <div
-                      key={step.num}
-                      className={`p-4 rounded-md border transition-all duration-500 ${
-                        isActive
-                          ? 'bg-[#231A12] border-[#D1A85A] shadow-[0_0_25px_rgba(209,168,90,0.2)] translate-x-1'
-                          : isPassed
-                          ? 'bg-[#17130F]/60 border-[#D1A85A]/30 opacity-80'
-                          : 'bg-black/30 border-white/5 opacity-40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <div className="flex items-center gap-2.5">
-                          <span
-                            className={`font-cinzel text-xs font-bold px-2 py-0.5 rounded ${
-                              isActive
-                                ? 'bg-[#D1A85A] text-[#0C0C0C]'
-                                : 'bg-[#1B1612] text-[#D1A85A] border border-[#D1A85A]/30'
-                            }`}
-                          >
-                            {step.num}
-                          </span>
-                          <h4 className="font-cinzel text-sm font-semibold text-[#F7F4EA]">
-                            {step.title}
-                          </h4>
-                        </div>
-                        <span className="font-sans text-[11px] text-[#D1A85A] font-mono">
-                          {step.spec}
+                return (
+                  <div
+                    key={step.num}
+                    className={`py-3.5 border-b border-[#D1A85A]/15 transition-all duration-300 ${
+                      isActive
+                        ? 'pl-3.5 border-l-2 border-l-[#D1A85A] bg-[#D1A85A]/5'
+                        : isPassed
+                        ? 'opacity-85 pl-1'
+                        : 'opacity-40 pl-1'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-2">
+                        <span className={`font-cinzel text-xs font-bold ${isActive ? 'text-[#D1A85A]' : 'text-[#F7F4EA]/60'}`}>
+                          {step.num}.
                         </span>
+                        <h4 className={`font-cinzel text-sm font-semibold ${isActive ? 'text-[#F7F4EA]' : 'text-[#F7F4EA]/80'}`}>
+                          {step.title}
+                        </h4>
                       </div>
-
-                      <p className="font-sans text-xs text-[#F7F4EA]/70 font-light leading-relaxed pl-8">
-                        {step.desc}
-                      </p>
+                      <span className="font-sans text-[11px] text-[#D1A85A] font-mono">
+                        {step.spec}
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
+
+                    <p className="font-sans text-xs text-[#F7F4EA]/75 font-light leading-relaxed pl-5">
+                      {step.desc}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -700,8 +693,8 @@ export const PourRitualSection: React.FC = () => {
               />
             </div>
 
-            {/* RECUADRO ADAPTADO AL CENTRO: ESPECIFICACIÓN DE CRISTALERÍA Y ORIGEN */}
-            <div className="w-full max-w-[460px] mt-4 p-4 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_12px_30px_rgba(0,0,0,0.7)] flex items-center justify-between gap-3 text-xs">
+            {/* ESPECIFICACIÓN DE CRISTALERÍA Y ORIGEN - LÍNEA LIMPIA SIN RECUADROS PESADOS */}
+            <div className="w-full max-w-[460px] mt-4 py-3.5 px-3 border-t border-b border-[#D1A85A]/20 flex items-center justify-between gap-3 text-xs">
               <div className="flex items-center gap-2.5">
                 <GothicCross className="w-4 h-4 text-[#D1A85A] flex-shrink-0" />
                 <div>
@@ -725,40 +718,51 @@ export const PourRitualSection: React.FC = () => {
           </div>
 
           {/* RIGHT: SOMMELIER SPECIFICATIONS & TASTING PROTOCOL */}
-          <div className="lg:col-span-3 space-y-4 order-3">
-            <div className="p-6 rounded-lg bg-[#14100C]/90 border border-[#D1A85A]/25 backdrop-blur-md shadow-[0_15px_35px_rgba(0,0,0,0.7)]">
-              <span className="font-cinzel text-[10px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block mb-4">
+          <div className="lg:col-span-3 space-y-6 order-3 text-left text-xs">
+            <div className="pb-3 border-b border-[#D1A85A]/25">
+              <span className="font-cinzel text-[11px] uppercase tracking-[0.25em] text-[#D1A85A] font-bold block">
                 {language === 'es' ? 'Norma de Cristalería' : 'Glassware Standard'}
               </span>
+            </div>
 
-              <div className="space-y-4 text-xs">
-                <div>
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Geometría del Cáliz' : 'Chalice Geometry'}</span>
-                  <p className="text-[#F7F4EA] font-medium">{language === 'es' ? 'Boca acampanada para oxigenar los ésteres de la levadura de abadía.' : 'Flared rim engineered to aerate Belgian abbey yeast esters.'}</p>
-                </div>
+            <div className="space-y-4">
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <span className="text-[#F7F4EA]/50 block mb-1 font-cinzel text-[10px] uppercase tracking-wider">
+                  {language === 'es' ? 'Geometría del Cáliz' : 'Chalice Geometry'}
+                </span>
+                <p className="text-[#F7F4EA]/90 font-light leading-relaxed">
+                  {language === 'es' ? 'Boca acampanada para oxigenar los ésteres de la levadura de abadía.' : 'Flared rim engineered to aerate Belgian abbey yeast esters.'}
+                </p>
+              </div>
 
-                <div className="border-t border-[#D1A85A]/15 pt-3">
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Tallo & Aislamiento' : 'Stem & Thermal Insulation'}</span>
-                  <p className="text-[#F7F4EA] font-medium">{language === 'es' ? 'Sujeción obligatoria por el fuste para evitar calentar el brebaje con la mano.' : 'Mandatory grip by the stem to prevent body heat transfer to the brew.'}</p>
-                </div>
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <span className="text-[#F7F4EA]/50 block mb-1 font-cinzel text-[10px] uppercase tracking-wider">
+                  {language === 'es' ? 'Tallo & Aislamiento' : 'Stem & Thermal Insulation'}
+                </span>
+                <p className="text-[#F7F4EA]/90 font-light leading-relaxed">
+                  {language === 'es' ? 'Sujeción obligatoria por el fuste para evitar calentar el brebaje con la mano.' : 'Mandatory grip by the stem to prevent body heat transfer to the brew.'}
+                </p>
+              </div>
 
-                <div className="border-t border-[#D1A85A]/15 pt-3">
-                  <span className="text-[#F7F4EA]/50 block mb-0.5">{language === 'es' ? 'Retención de Corona' : 'Head Retention'}</span>
-                  <p className="text-[#D1A85A] font-medium">{language === 'es' ? 'Espuma compacta que previene la oxidación de la malta caramelo.' : 'Dense foam blanket safeguarding caramel malts from oxidation.'}</p>
-                </div>
+              <div className="pb-3 border-b border-[#D1A85A]/15">
+                <span className="text-[#F7F4EA]/50 block mb-1 font-cinzel text-[10px] uppercase tracking-wider">
+                  {language === 'es' ? 'Retención de Corona' : 'Head Retention'}
+                </span>
+                <p className="text-[#D1A85A] font-medium leading-relaxed">
+                  {language === 'es' ? 'Espuma compacta que previene la oxidación de la malta caramelo.' : 'Dense foam blanket safeguarding caramel malts from oxidation.'}</p>
               </div>
             </div>
 
             {/* PROTOCOL NOTICE FOR RESTAURANTS */}
-            <div className="p-5 rounded-lg bg-gradient-to-br from-[#1C1611] to-[#120E0A] border border-[#D1A85A]/30">
-              <span className="font-cinzel text-[10px] uppercase tracking-widest text-[#D1A85A] font-semibold block mb-2">
+            <div className="pt-2 pl-4 border-l-2 border-[#D1A85A]/50">
+              <span className="font-cinzel text-[10px] uppercase tracking-widest text-[#D1A85A] font-semibold block mb-1.5">
                 {language === 'es' ? 'Protocolo Restaurantes & Hoteles' : 'Hospitality & Venue Protocol'}
               </span>
-              <p className="font-sans text-[12px] text-[#F7F4EA]/70 font-light leading-relaxed">
+              <p className="font-sans text-xs text-[#F7F4EA]/75 font-light leading-relaxed">
                 {language === 'es' ? (
-                  <>Cada caja de <strong className="text-[#F7F4EA]">Kloster®</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.</>
+                  <>Cada caja de <strong className="text-[#F7F4EA] font-semibold">Kloster</strong> para cuentas exclusivas en Santa Cruz incluye capacitación en mesa y cristalería consagrada para el personal de servicio.</>
                 ) : (
-                  <>Each case of <strong className="text-[#F7F4EA]">Kloster®</strong> for partner accounts in Bolivia includes table-service guidance and consecrated glassware for hospitality staff.</>
+                  <>Each case of <strong className="text-[#F7F4EA] font-semibold">Kloster</strong> for partner accounts in Bolivia includes table-service guidance and consecrated glassware for hospitality staff.</>
                 )}
               </p>
             </div>

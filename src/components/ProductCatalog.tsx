@@ -17,8 +17,8 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
   const { t, language } = useLanguage();
 
   const filteredBeers = BEER_VARIANTS.filter((b) => {
-    if (filter === 'con-alcohol') return b.abv === '5.0%';
-    if (filter === 'sin-alcohol') return b.abv === '0.0%';
+    if (filter === 'con-alcohol') return b.abv.includes('5');
+    if (filter === 'sin-alcohol') return b.id === 'hydrate' || b.abv.includes('0,25') || b.abv.includes('0.25');
     return true;
   });
 
@@ -29,7 +29,9 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
       subname: t(`beer.${beer.id}.sub`) !== `beer.${beer.id}.sub` ? t(`beer.${beer.id}.sub`) : beer.subname,
       tagline: t(`beer.${beer.id}.tag`) !== `beer.${beer.id}.tag` ? t(`beer.${beer.id}.tag`) : beer.tagline,
       description: t(`beer.${beer.id}.desc`) !== `beer.${beer.id}.desc` ? t(`beer.${beer.id}.desc`) : beer.description,
+      apariencia: t(`beer.${beer.id}.apariencia`) !== `beer.${beer.id}.apariencia` ? t(`beer.${beer.id}.apariencia`) : beer.apariencia,
       aroma: t(`beer.${beer.id}.aroma`) !== `beer.${beer.id}.aroma` ? t(`beer.${beer.id}.aroma`) : beer.aroma,
+      sabor: t(`beer.${beer.id}.sabor`) !== `beer.${beer.id}.sabor` ? t(`beer.${beer.id}.sabor`) : beer.sabor,
       boca: t(`beer.${beer.id}.boca`) !== `beer.${beer.id}.boca` ? t(`beer.${beer.id}.boca`) : beer.boca,
     };
   };
@@ -139,7 +141,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                     </span>
                     <span
                       className={`px-2 py-0.5 rounded text-[9px] font-cinzel uppercase tracking-wider font-bold whitespace-nowrap ${
-                        beer.abv === '0.0%'
+                        beer.id === 'hydrate'
                           ? 'bg-[#2E6F56]/30 text-[#8CE3BA] border border-[#2E6F56]'
                           : 'bg-[#17130F] text-[#D1A85A] border border-[#D1A85A]/40'
                       }`}
@@ -149,17 +151,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                   </div>
 
                   <h3 className="font-gothic text-3xl sm:text-4xl text-[#F7F4EA] leading-none mb-1">
-                    {translatedBeer.name.includes('Kloster') ? (
-                      <>
-                        Kloster
-                        <span className="text-[0.32em] font-sans font-bold text-[#F7F4EA] align-super ml-0.5 select-none inline-block">
-                          ®
-                        </span>
-                        {translatedBeer.name.replace(/^Kloster\s*/, ' ')}
-                      </>
-                    ) : (
-                      translatedBeer.name
-                    )}
+                    {translatedBeer.name}
                   </h3>
 
                   <p className="font-cinzel text-xs text-[#F7F4EA]/60 tracking-wider mb-4">
@@ -199,17 +191,25 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                   {translatedBeer.description}
                 </p>
 
-                {/* Specs row */}
-                <div className="flex items-center justify-between pt-3 pb-4 border-t border-[#D1A85A]/15 text-xs text-[#F7F4EA]/70">
+                {/* Specs row: Alcohol (ABV), Amargor (IBU) y Servicio por separado */}
+                <div className="grid grid-cols-3 gap-1 pt-3 pb-4 border-t border-[#D1A85A]/15 text-center text-xs text-[#F7F4EA]/70">
+                  <div>
+                    <span className="font-cinzel text-[9px] uppercase tracking-wider text-[#F7F4EA]/50 block">
+                      Alcohol
+                    </span>
+                    <span className="font-sans font-bold text-[#D1A85A] text-xs">
+                      {beer.abv}
+                    </span>
+                  </div>
                   <div>
                     <span className="font-cinzel text-[9px] uppercase tracking-wider text-[#F7F4EA]/50 block">
                       {language === 'es' ? 'Amargor' : 'Bitterness'}
                     </span>
-                    <span className="font-sans font-bold text-[#D1A85A] text-sm">
+                    <span className="font-sans font-bold text-[#D1A85A] text-xs">
                       {beer.ibu} IBU
                     </span>
                   </div>
-                  <div className="text-right">
+                  <div>
                     <span className="font-cinzel text-[9px] uppercase tracking-wider text-[#F7F4EA]/50 block">
                       {language === 'es' ? 'Servicio' : 'Serving'}
                     </span>
@@ -235,7 +235,7 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                     onClick={() => onSelectForB2B(translatedBeer)}
                     className="py-2.5 px-3 bg-[#344A2B] hover:bg-[#3f5c34] text-[#F2E5CE] font-cinzel text-[10px] sm:text-[11px] uppercase tracking-[0.12em] font-bold border border-[#D1A85A] rounded transition-all shadow-[0_0_12px_rgba(209,168,90,0.2)] hover:shadow-[0_0_20px_rgba(209,168,90,0.4)] whitespace-nowrap cursor-pointer"
                   >
-                    {language === 'es' ? 'Pedir Lote' : 'Order Batch'}
+                    {language === 'es' ? 'PEDIR' : 'ORDER'}
                   </button>
                 </div>
               </article>
