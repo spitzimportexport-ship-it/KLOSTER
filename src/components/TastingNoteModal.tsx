@@ -1,7 +1,7 @@
 import React from 'react';
 import { BeerVariant } from '../types';
 import { GothicCross } from './MonkIsotype';
-import { X, Utensils, Wine, MessageSquare, Eye, Sparkles, BookOpen } from 'lucide-react';
+import { X, Utensils, Wine, MessageSquare, Eye, Wheat, BookOpen } from 'lucide-react';
 import { OFFICIAL_BOTTLE_IMAGE_URL } from '../data/beerData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -67,20 +67,17 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
             
             {/* Columna Izquierda: Botella Oficial y Métricas Técnicas */}
             <div className="flex flex-col items-center justify-center text-center p-2 md:sticky md:top-0">
-              <div className="relative w-full aspect-[3/4] max-h-72 flex items-center justify-center overflow-hidden mb-3">
-                <div
-                  className="absolute w-44 h-44 rounded-full blur-2xl opacity-20 pointer-events-none"
-                  style={{ backgroundColor: beer.colorCode }}
-                />
+              {/* Ventanal de Abadía: Enmascaramiento semántico y arquitectónico */}
+              <figure className="relative w-full max-w-[240px] aspect-[4/5] mb-3 [border-radius:50%_50%_0_0] overflow-hidden border border-[#D1A85A] shadow-[0_20px_45px_rgba(0,0,0,0.95)] bg-[#0C0A08]">
                 <img
                   src={beer.image || OFFICIAL_BOTTLE_IMAGE_URL}
-                  alt={`Botella oficial ${beer.name}`}
+                  alt={`Fotografía oficial en abadía de cerveza artesanal ${beer.name}`}
                   loading="eager"
                   decoding="async"
-                  className="h-full w-auto object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.95)] filter contrast-105"
+                  className="w-full h-full object-cover object-center filter contrast-[1.02]"
                   referrerPolicy="no-referrer"
                 />
-              </div>
+              </figure>
 
               <span className="font-gothic text-3xl sm:text-4xl text-[#F7F4EA] block leading-tight">
                 {beer.name}
@@ -155,7 +152,7 @@ export const TastingNoteModal: React.FC<TastingNoteModalProps> = ({
               {/* 4. Sabor */}
               <div className="pb-3 border-b border-[#D1A85A]/15">
                 <div className="flex items-center gap-2 mb-1 text-[#D1A85A] font-cinzel uppercase tracking-wider text-[11px] font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-[#D1A85A]" />
+                  <Wheat className="w-3.5 h-3.5 text-[#D1A85A]" />
                   <span>{t('modal.flavorTitle')}</span>
                 </div>
                 <p className="text-[#F7F4EA]/85 font-light leading-relaxed">

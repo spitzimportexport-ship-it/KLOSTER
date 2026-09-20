@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GothicCross } from './MonkIsotype';
-import { ArrowDown, Menu, X, ChevronRight } from 'lucide-react';
+import { ArrowDown, Menu, X, ChevronRight, MessageSquare } from 'lucide-react';
 import officialLogoImg from '../assets/images/regenerated_image_1788997141062.jpg';
 import bottleRelicImg from '../assets/images/regenerated_image_1788995261339.png';
 import { useLanguage } from '../context/LanguageContext';
@@ -13,7 +13,7 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onDiscover, onOpenContact }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const handleScrollTo = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -21,6 +21,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onDiscover, onOpenCont
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleWhatsAppContact = () => {
+    const greeting = language === 'es'
+      ? '¡Hola Kloster! Me contacto desde su sitio web oficial para consultar sobre sus cervezas artesanales, puntos de venta y pedidos.'
+      : 'Hello Kloster! I am reaching out from your official website to inquire about your craft beers and ordering availability.';
+    const whatsappUrl = `https://wa.me/59176502714?text=${encodeURIComponent(greeting)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -203,10 +211,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onDiscover, onOpenCont
 
               <button
                 type="button"
-                onClick={onOpenContact}
-                className="btn-secondary whitespace-nowrap cursor-pointer font-cinzel uppercase text-xs tracking-[0.14em]"
+                onClick={handleWhatsAppContact}
+                className="btn-secondary whitespace-nowrap cursor-pointer font-cinzel uppercase text-xs tracking-[0.14em] inline-flex items-center gap-2"
+                aria-label="Abrir WhatsApp oficial de Kloster"
               >
-                {t('hero.ctaContact')}
+                <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
+                <span>{t('hero.ctaContact')}</span>
               </button>
             </div>
 

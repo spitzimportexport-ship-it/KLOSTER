@@ -159,10 +159,10 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                   </p>
                 </div>
 
-                {/* Single-layer Bottle Presentation Stage */}
-                <div
+                {/* Ventanal de Abadía: Enmascaramiento semántico y arquitectónico */}
+                <figure
                   onClick={() => setSelectedBeer(translatedBeer)}
-                  className="relative group cursor-pointer my-4 flex items-center justify-center py-4 rounded-lg overflow-hidden transition-colors"
+                  className="relative group cursor-pointer my-4 w-full aspect-[4/5] [border-radius:50%_50%_0_0] overflow-hidden border border-[#D1A85A]/70 group-hover:border-[#D1A85A] shadow-[0_14px_30px_rgba(0,0,0,0.85)] group-hover:shadow-[0_20px_45px_rgba(209,168,90,0.35)] transition-all duration-500 bg-[#0C0A08]"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -170,21 +170,15 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({ onSelectForB2B }
                   }}
                   aria-label={`${t('catalog.tastingBtn')} - ${translatedBeer.name}`}
                 >
-                  {/* Subtle backlight */}
-                  <div
-                    className="absolute w-40 h-40 rounded-full blur-2xl opacity-15 group-hover:opacity-30 transition-opacity pointer-events-none"
-                    style={{ backgroundColor: beer.colorCode }}
-                  />
-
                   <img
                     src={beer.image || OFFICIAL_BOTTLE_IMAGE_URL}
-                    alt={`Cerveza artesanal ${beer.name}`}
+                    alt={`Fotografía en abadía de la cerveza artesanal ${beer.name}`}
                     loading="lazy"
                     decoding="async"
-                    className="relative z-10 h-56 sm:h-60 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.95)] transform group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
                     referrerPolicy="no-referrer"
                   />
-                </div>
+                </figure>
 
                 {/* Description & Sensory Notes */}
                 <p className="font-sans text-xs text-[#F7F4EA]/75 leading-relaxed font-light mb-4 line-clamp-3">
